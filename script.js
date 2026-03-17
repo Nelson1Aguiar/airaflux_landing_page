@@ -128,7 +128,7 @@ const initBackToTop = () => {
 };
 
 const validateForm = () => {
-  const form = select("#airaflux-form");
+  const form = select("#Airaflux-form") || select("#airaflux-form") || select(".af-form");
   if (!form) return null;
 
   const fields = {
@@ -185,7 +185,7 @@ const validateForm = () => {
 };
 
 const initForm = () => {
-  const form = select("#airaflux-form");
+  const form = select("#Airaflux-form") || select("#airaflux-form") || select(".af-form");
   const feedback = select("#form-feedback");
   if (!form || !feedback) return;
 
@@ -223,6 +223,7 @@ const initForm = () => {
         "https://n8n-jowco44o0oo4w8448sgc880c.app5.w8hub.com.br/webhook/airaflux_form",
         {
           method: "POST",
+          mode: "no-cors",
           headers: {
             "Content-Type": "application/json",
           },
@@ -230,12 +231,8 @@ const initForm = () => {
         }
       );
 
-      if (!response.ok) {
-        throw new Error(`Erro de rede (${response.status})`);
-      }
-
       feedback.textContent =
-        "Recebemos sua ideia! Em breve a equipe da AiraFlux entrará em contato.";
+        "Recebemos sua ideia! Em breve a equipe da Airaflux entrará em contato.";
       feedback.classList.add("success");
       form.reset();
     } catch (error) {
