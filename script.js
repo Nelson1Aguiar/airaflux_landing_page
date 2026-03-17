@@ -127,6 +127,34 @@ const initBackToTop = () => {
   });
 };
 
+const initHeroParallax = () => {
+  const container = select(".hero-visual");
+  const orbital = select(".orbital");
+  if (!container || !orbital) return;
+
+  const maxTilt = 8;
+
+  const handleMove = (event) => {
+    const rect = container.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const percentX = (x / rect.width) * 2 - 1;
+    const percentY = (y / rect.height) * 2 - 1;
+
+    const rotateX = -percentY * maxTilt;
+    const rotateY = percentX * maxTilt;
+
+    orbital.style.transform = `rotate3d(${rotateX}, ${rotateY}, 0, 12deg)`;
+  };
+
+  const handleLeave = () => {
+    orbital.style.transform = "";
+  };
+
+  container.addEventListener("mousemove", handleMove);
+  container.addEventListener("mouseleave", handleLeave);
+};
+
 const validateForm = () => {
   const form = select("#Airaflux-form") || select("#airaflux-form") || select(".af-form");
   if (!form) return null;
@@ -254,5 +282,6 @@ window.addEventListener("DOMContentLoaded", () => {
   initSimulationScroll();
   initBackToTop();
   initForm();
+  initHeroParallax();
 });
 

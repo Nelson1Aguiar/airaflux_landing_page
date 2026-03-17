@@ -363,28 +363,42 @@ button {
 
 .orbital {
   position: relative;
-  width: min(320px, 100%);
+  width: min(360px, 100%);
   aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 20%, #42f5ff, #1a1c50 55%, #020310 75%);
-  box-shadow:
-    0 0 80px rgba(40, 194, 255, 0.8),
-    0 0 140px rgba(163, 60, 255, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  background: transparent;
+  border-radius: 50%;
 }
 
-.orbital-core {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #e9ffff, #5ad1ff 55%, #003677 100%);
-  box-shadow:
-    0 0 40px rgba(131, 239, 255, 0.7),
-    0 0 80px rgba(11, 204, 255, 0.9);
-  animation: pulse-core 2.4s ease-in-out infinite;
+.orbital::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 10%, rgba(40, 194, 255, 0.7), transparent 60%),
+    radial-gradient(circle at 80% 85%, rgba(163, 60, 255, 0.7), transparent 60%);
+  opacity: 0.9;
+  filter: blur(32px);
+  z-index: -1;
+}
+
+.hero-logo-main {
+  width: 88%;
+  height: 88%;
+  max-width: 360px;
+  max-height: 360px;
+  object-fit: contain;
+  transform-origin: center;
+  animation: pulse-core 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(40, 194, 255, 0.9));
+  transition: transform 0.4s ease-out, filter 0.4s ease-out;
+}
+
+.hero-visual:hover .hero-logo-main {
+  transform: scale(1.05) rotate(-4deg);
+  filter: drop-shadow(0 0 26px rgba(163, 60, 255, 0.95));
 }
 
 .orbital-ring {
